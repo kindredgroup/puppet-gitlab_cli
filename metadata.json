@@ -1,0 +1,14 @@
+{
+  "name": "unibet-gitlab_cli",
+  "version": "0.1.0",
+  "author": "unibet",
+  "summary": "Install and configure python-gitlab cli",
+  "license": "Apache 2.0",
+  "source": "https://github.com/unibet/puppet-gitlab_cli",
+  "project_page": "https://github.com/unibet/puppet-gitlab_cli",
+  "issues_url": "https://github.com/unibet/puppet-gitlab_cli/issues",
+  "dependencies": [
+    { "name": "stankevich-python", "version_range": ">= 1.7.15" }
+  ]
+}
+

@@ -1,0 +1,7 @@
+/pkg
+*.lock
+/vendor
+spec/fixtures/
+.bundle/
+.vagrant/
+/coverage
