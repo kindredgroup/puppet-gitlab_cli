@@ -1,6 +1,6 @@
-# == Class: gitlab_cli
+# == Class: gitlab_cli::config
 #
-# Full description of class gitlab_cli here.
+# Define configuration resource to allow loops
 #
 # === Parameters
 #
@@ -35,22 +35,18 @@
 #
 # Copyright 2014 North Development AB
 #
-class gitlab_cli(
-  $path           = $::gitlab_cli::params::path,
-  $owner          = $::gitlab_cli::params::owner,
-  $url            = $::gitlab_cli::params::url,
-  $private_token  = $::gitlab_cli::params::private_token,
-  $ssl_verify     = $::gitlab_cli::params::ssl_verify,
-  $timeout        = $::gitlab_cli::params::timeout
-) inherits gitlab_cli::params {
+define gitlab_cli::config(
+  $path,
+  $url,
+  $private_token,
+  $ssl_verify     = true,
+  $timeout        = 5
+) {
 
-  python::pip { 'python-gitlab' : } ->
-  gitlab_cli::config { $owner:
-    path          => $path,
-    url           => $url,
-    private_token => $private_token,
-    ssl_verify    => $ssl_verify,
-    timeout       => $timeout
+  file { "$path/.python-gitlab.cfg":
+    owner => $name,
+    mode  => 0400,
+    content => template("${module_name}/python-gitlab.cfg.erb"),
   }
 
 }
