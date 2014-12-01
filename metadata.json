@@ -1,6 +1,6 @@
 {
   "name": "unibet-gitlab_cli",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "author": "unibet",
   "summary": "Install and configure python-gitlab cli",
   "license": "Apache 2.0",

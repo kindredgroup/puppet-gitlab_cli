@@ -36,7 +36,7 @@
 # Copyright 2014 North Development AB
 #
 class gitlab_cli(
-  $path           = $::gitlab_cli::params::path,
+  $base_path      = $::gitlab_cli::params::base_path,
   $owner          = $::gitlab_cli::params::owner,
   $url            = $::gitlab_cli::params::url,
   $private_token  = $::gitlab_cli::params::private_token,
@@ -46,7 +46,7 @@ class gitlab_cli(
 
   python::pip { 'python-gitlab' : } ->
   gitlab_cli::config { $owner:
-    path          => $path,
+    path          => "${base_path}/${name}",
     url           => $url,
     private_token => $private_token,
     ssl_verify    => $ssl_verify,
