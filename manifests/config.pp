@@ -40,10 +40,17 @@ define gitlab_cli::config(
   $url,
   $private_token,
   $ssl_verify     = true,
-  $timeout        = 5
+  $timeout        = 5,
+  $is_base_path   = false
 ) {
 
-  file { "$path/.python-gitlab.cfg":
+  if $is_base_path {
+    $cfg_path = "${path}/${name}"
+  } else {
+    $cfg_path = $path
+  }
+
+  file { "${cfg_path}/.python-gitlab.cfg":
     owner => $name,
     mode  => 0400,
     content => template("${module_name}/python-gitlab.cfg.erb"),

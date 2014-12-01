@@ -37,6 +37,7 @@
 #
 class gitlab_cli(
   $base_path      = $::gitlab_cli::params::base_path,
+  $path           = $::gitlab_cli::params::path,
   $owner          = $::gitlab_cli::params::owner,
   $url            = $::gitlab_cli::params::url,
   $private_token  = $::gitlab_cli::params::private_token,
@@ -46,11 +47,20 @@ class gitlab_cli(
 
   python::pip { 'python-gitlab' : } ->
   gitlab_cli::config { $owner:
-    path          => "${base_path}/${name}",
     url           => $url,
     private_token => $private_token,
     ssl_verify    => $ssl_verify,
     timeout       => $timeout
   }
 
+  if $base_path != 'UNDEF' {
+    Gitlab_cli::Config[$owner] {
+      path         => $base_path,
+      is_base_path => true
+    }
+  } else {
+    Gitlab_cli::Config[$owner] {
+      path         => $path
+    }
+  }
 }

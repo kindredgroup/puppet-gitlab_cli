@@ -36,6 +36,7 @@
 # Copyright 2014 North Development AB
 #
 class gitlab_cli::params {
+  $base_path      = 'UNDEF'
   $path           = '/root'
   $user           = 'root'
   $private_token  = 'XXXX'
